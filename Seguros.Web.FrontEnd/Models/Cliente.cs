@@ -14,7 +14,7 @@ namespace Seguros.Web.FrontEnd.Models
         public int Id_cliente { get; set; }
 
         [Display(Name = "Rut")]
-        public int rut_cliente { get; set; }
+        public int Rut_cliente { get; set; }
 
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }

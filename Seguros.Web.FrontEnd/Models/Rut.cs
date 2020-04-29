@@ -6,8 +6,7 @@ using System.Linq;
 using System.Web;
 
 namespace Seguros.Web.FrontEnd.Models
-{
-    [Table("Rut")]
+{    
     public class Rut
     {
         
