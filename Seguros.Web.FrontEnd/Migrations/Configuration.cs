@@ -9,7 +9,7 @@ namespace Seguros.Web.FrontEnd.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Seguros.Web.FrontEnd.Models.SegurosDbContext context)

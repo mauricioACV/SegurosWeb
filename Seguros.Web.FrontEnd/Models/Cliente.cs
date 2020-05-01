@@ -34,12 +34,12 @@ namespace Seguros.Web.FrontEnd.Models
         [Display(Name = "Número")]
         public int NumCalle { get; set; }
 
-        public string Comuna { get; set; }
+        public Comuna comuna { get; set; }
 
-        public string Ciudad { get; set; }
+        public Ciudad ciudad { get; set; }
 
         [Display(Name = "Región")]
-        public string Region { get; set; }
+        public Region region { get; set; }
 
         public int Telefono { get; set; }
 

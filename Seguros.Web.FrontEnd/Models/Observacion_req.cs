@@ -17,6 +17,8 @@ namespace Seguros.Web.FrontEnd.Models
         [StringLength(300)]
         public string Descripcion_obs { get; set; }
 
+        public Requerimiento requerimiento { get; set; }
+
         public int Id_deptoEmpresa { get; set; }
 
         public int Id_rutEmpleado { get; set; }

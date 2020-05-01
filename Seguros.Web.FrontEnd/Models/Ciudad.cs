@@ -16,6 +16,8 @@ namespace Seguros.Web.FrontEnd.Models
         [StringLength(300)]
         public string Nombre_ciudad { get; set; }
 
-        public int Id_region { get; set; }
+        public Region region { get; set; }
+
+        public List<Comuna> comunas { get; set; }
     }
 }
