@@ -1,0 +1,42 @@
+﻿@model Seguros.Web.FrontEnd.Models.Requerimiento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Requerimiento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_req)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_req)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_limit_req)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_limit_req)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_fin_real)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_fin_real)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
