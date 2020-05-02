@@ -39,7 +39,7 @@ namespace Seguros.Web.FrontEnd.Models
         public Ciudad ciudad { get; set; }
 
         [Display(Name = "Región")]
-        public Region region { get; set; }
+        public Region Region { get; set; }
 
         public int Telefono { get; set; }
 
@@ -53,6 +53,7 @@ namespace Seguros.Web.FrontEnd.Models
         [Required]
         [StringLength(300)]
         public string Observaciones { get; set; }
+
        
     }
 }

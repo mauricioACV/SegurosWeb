@@ -161,6 +161,10 @@
     <Compile Include="Migrations\202005010326205_reestructuracionCliente.Designer.cs">
       <DependentUpon>202005010326205_reestructuracionCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005010721406_updateDataBase.cs" />
+    <Compile Include="Migrations\202005010721406_updateDataBase.Designer.cs">
+      <DependentUpon>202005010721406_updateDataBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Ciudad.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -263,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005010326205_reestructuracionCliente.resx">
       <DependentUpon>202005010326205_reestructuracionCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005010721406_updateDataBase.resx">
+      <DependentUpon>202005010721406_updateDataBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -38,7 +38,25 @@ namespace Seguros.Web.FrontEnd.Controllers
         // GET: Cliente/Create
         public ActionResult Create()
         {
+            List<Region> RegionList = db.Region.ToList();
+            ViewBag.RegionList = new SelectList(RegionList, "Id", "Nombre_region");
             return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult GetCiudadByRegion(int id)
+        {
+            List<Ciudad> CiudadList = db.Ciudad.Where(x => x.region.Id == id).ToList();
+            return Json(new { CiudadList = CiudadList }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult GetComunaByCiudad(string name)
+        {
+            List<Comuna> ComunaList = db.Comuna.Where(x => x.ciudad.Nombre_ciudad == name).ToList();
+            return Json(new { ComunaList = ComunaList }, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Cliente/Create
