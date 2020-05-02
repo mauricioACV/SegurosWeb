@@ -20,10 +20,12 @@ namespace Seguros.Web.FrontEnd.Models
                       
         public DateTime Fecha_fin_real { get; set; }
 
-        public Estado estado { get; set; }
+        public Estado Estado { get; set; }
 
-        public Cliente cliente { get; set; }
+        public Cliente Cliente { get; set; }
 
-        public List<Observacion_req> litsObservacion { get; set; }
+        public List<Observacion_req> LitsObservacion { get; set; }
+
+        public Empleado Empleado { get; set; }
     }
 }

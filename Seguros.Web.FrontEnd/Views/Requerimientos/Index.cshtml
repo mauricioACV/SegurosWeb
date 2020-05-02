@@ -9,37 +9,79 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha_req)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha_limit_req)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha_fin_real)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha_req)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha_limit_req)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha_fin_real)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+@using (Html.BeginForm("Index", "Requerimientos/Index", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.First().Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @if (ViewBag.EmpleadoList != null)
+            {
+                @Html.DropDownListFor(model => model.First().Empleado, ViewBag.EmpleadoList as SelectList, "---Seleccione Empleado----", new { @class = "form-control" })
+            }
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.First().Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @if (ViewBag.EstadoList != null)
+            {
+                @Html.DropDownListFor(model => model.First().Estado, ViewBag.EstadoList as SelectList, "---Seleccione Estado----", new { @class = "form-control" })
+            }
+
+        </div>
+    </div>
+
+    <input id="Submit1" type="submit" value="submit" />
 }
 
-</table>
+<br>
+
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                ENCARGADO
+            </th>
+            <th>
+                FECHA REQUERIMIENTO
+            </th>
+            <th>
+                ESTADO
+            </th>
+            <th>
+                CLIENTE
+            </th>
+            <th>
+                OBSERVACION
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Empleado.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha_req)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.Nombre)  @Html.DisplayFor(modelItem => item.Cliente.ApellidoPat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.Observaciones)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+

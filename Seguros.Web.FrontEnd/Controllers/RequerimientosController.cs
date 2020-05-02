@@ -43,14 +43,43 @@ namespace Seguros.Web.FrontEnd.Controllers
 
 
         // GET: Requerimientos
-        public ActionResult Index()
+        public ActionResult Index(int empleado =0, int estado = 0)
         {
             List<Empleado> EmpleadoList = FindListEmpleados();
             ViewBag.EmpleadoList = new SelectList(EmpleadoList, "Id_empleado", "Nombre");
 
             List<Estado> EstadoList = db.Estado.ToList();
             ViewBag.EstadoList = new SelectList(EstadoList, "Id", "Descripcion");
-            return View(db.Requerimiento.ToList());
+
+            List<Cliente> listEmpleado = db.Cliente.ToList();
+
+            List<Requerimiento> list = db.Requerimiento.ToList();
+            List<Requerimiento> nuevaList = new List<Requerimiento>();
+            list.ForEach(l => {
+                if(validarRequerimientoEmpleado(l, empleado) && validarRequerimientoEstado(l, estado))
+                {
+                    nuevaList.Add(l);
+                }
+            });
+            return View(nuevaList);
+        }
+
+        private bool validarRequerimientoEmpleado(Requerimiento req , int empleado)
+        {
+            if (empleado == 0 || req.Empleado.Id_empleado == empleado)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool validarRequerimientoEstado(Requerimiento req, int estado)
+        {
+            
+            if (estado == 0 || req.Estado.Id == estado)
+            {
+                return true;
+            }
+            return false;
         }
 
         // GET: Requerimientos/Details/5

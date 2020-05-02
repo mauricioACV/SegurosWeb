@@ -54,6 +54,7 @@ namespace Seguros.Web.FrontEnd.Models
         [StringLength(300)]
         public string Observaciones { get; set; }
 
-       
+        public List<Requerimiento> Requerimientos { get; set; }
+
     }
 }
