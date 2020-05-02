@@ -141,11 +141,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CiudadsController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
-    <Compile Include="Controllers\ComunasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RegionsController.cs" />
+    <Compile Include="Controllers\RequerimientosController.cs" />
+    <Compile Include="Controllers\RequerimientosSinAsignacionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -228,21 +227,16 @@
     <Content Include="Views\Cliente\Details.cshtml" />
     <Content Include="Views\Cliente\Edit.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
-    <Content Include="Views\Regions\Create.cshtml" />
-    <Content Include="Views\Regions\Delete.cshtml" />
-    <Content Include="Views\Regions\Details.cshtml" />
-    <Content Include="Views\Regions\Edit.cshtml" />
-    <Content Include="Views\Regions\Index.cshtml" />
-    <Content Include="Views\Ciudads\Create.cshtml" />
-    <Content Include="Views\Ciudads\Delete.cshtml" />
-    <Content Include="Views\Ciudads\Details.cshtml" />
-    <Content Include="Views\Ciudads\Edit.cshtml" />
-    <Content Include="Views\Ciudads\Index.cshtml" />
-    <Content Include="Views\Comunas\Create.cshtml" />
-    <Content Include="Views\Comunas\Delete.cshtml" />
-    <Content Include="Views\Comunas\Details.cshtml" />
-    <Content Include="Views\Comunas\Edit.cshtml" />
-    <Content Include="Views\Comunas\Index.cshtml" />
+    <Content Include="Views\Requerimientos\Create.cshtml" />
+    <Content Include="Views\Requerimientos\Delete.cshtml" />
+    <Content Include="Views\Requerimientos\Details.cshtml" />
+    <Content Include="Views\Requerimientos\Edit.cshtml" />
+    <Content Include="Views\Requerimientos\Index.cshtml" />
+    <Content Include="Views\RequerimientosSinAsignacion\Create.cshtml" />
+    <Content Include="Views\RequerimientosSinAsignacion\Delete.cshtml" />
+    <Content Include="Views\RequerimientosSinAsignacion\Details.cshtml" />
+    <Content Include="Views\RequerimientosSinAsignacion\Edit.cshtml" />
+    <Content Include="Views\RequerimientosSinAsignacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
