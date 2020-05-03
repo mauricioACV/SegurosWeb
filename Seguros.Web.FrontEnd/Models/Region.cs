@@ -10,13 +10,17 @@ namespace Seguros.Web.FrontEnd.Models
     [Table("Region")]
     public class Region
     {
+        public Region()
+        {
+            ciudades = new HashSet<Ciudad>();
+        }
         public int Id { get; set; }
 
         [Required]
         [StringLength(300)]
         public string Nombre_region { get; set; }
 
-        public List<Ciudad> ciudades { get; set; }
+        public ICollection<Ciudad> ciudades { get; set; }
 
 
     }

@@ -13,6 +13,8 @@ namespace Seguros.Web.FrontEnd.Controllers
     public class ClienteController : Controller
     {
         private SegurosDbContext db = new SegurosDbContext();
+        private List<SelectListItem> _regionsItems;
+
 
         // GET: Cliente
         public ActionResult Index()
@@ -38,25 +40,37 @@ namespace Seguros.Web.FrontEnd.Controllers
         // GET: Cliente/Create
         public ActionResult Create()
         {
-            List<Region> RegionList = db.Region.ToList();
-            ViewBag.RegionList = new SelectList(RegionList, "Id", "Nombre_region");
+
+            var regions = db.Region.ToList();
+            _regionsItems = new List<SelectListItem>();
+            foreach (var item in regions)
+            {
+                _regionsItems.Add(new SelectListItem
+                {
+                    Text = item.Nombre_region,
+                    Value = item.Id.ToString()
+                });
+            }
+            ViewBag.regionsItems = _regionsItems;
+            //List<Region> RegionList = db.Region.ToList();
+            //ViewBag.RegionList = new SelectList(RegionList, "Id", "Nombre_region");
             return View();
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult GetCiudadByRegion(int id)
+        public ActionResult GetCiudadByRegion(int RegionId)
         {
-            List<Ciudad> CiudadList = db.Ciudad.Where(x => x.region.Id == id).ToList();
-            return Json(new { CiudadList = CiudadList }, JsonRequestBehavior.AllowGet);
+            List<Ciudad> CiudadList = db.Ciudad.Where(x => x.region.Id == RegionId).ToList();
+            return Json(new { CiudadList }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult GetComunaByCiudad(string name)
+        public ActionResult GetComunaByCiudad(int CiudadId)
         {
-            List<Comuna> ComunaList = db.Comuna.Where(x => x.ciudad.Nombre_ciudad == name).ToList();
-            return Json(new { ComunaList = ComunaList }, JsonRequestBehavior.AllowGet);
+            List<Comuna> ComunaList = db.Comuna.Where(x => x.ciudad.Id == CiudadId).ToList();
+            return Json(new { ComunaList }, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Cliente/Create
@@ -64,7 +78,7 @@ namespace Seguros.Web.FrontEnd.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_cliente,Rut_cliente,Nombre,ApellidoPat,ApellidoMat,Fecha_nacimiento,Calle,NumCalle,Comuna,Ciudad,Region,Telefono,Email,Operacion,Estado,Observaciones")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "Id_cliente,Rut_cliente,Nombre,ApellidoPat,ApellidoMat,Fecha_nacimiento,Calle,NumCalle,comuna,ciudad,Region,Telefono,Email,Operacion,Estado,Observaciones")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
