@@ -145,6 +145,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RequerimientosController.cs" />
     <Compile Include="Controllers\RequerimientosSinAsignacionController.cs" />
+    <Compile Include="Controllers\ResumenClass.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,6 +184,10 @@
     <Compile Include="Migrations\202005020843406_agregaRelacionRequerimientoAClietne3.cs" />
     <Compile Include="Migrations\202005020843406_agregaRelacionRequerimientoAClietne3.Designer.cs">
       <DependentUpon>202005020843406_agregaRelacionRequerimientoAClietne3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005030054421_migracion.cs" />
+    <Compile Include="Migrations\202005030054421_migracion.Designer.cs">
+      <DependentUpon>202005030054421_migracion.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Ciudad.cs" />
@@ -299,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005020843406_agregaRelacionRequerimientoAClietne3.resx">
       <DependentUpon>202005020843406_agregaRelacionRequerimientoAClietne3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005030054421_migracion.resx">
+      <DependentUpon>202005030054421_migracion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

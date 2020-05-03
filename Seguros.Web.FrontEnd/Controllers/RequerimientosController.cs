@@ -43,7 +43,7 @@ namespace Seguros.Web.FrontEnd.Controllers
 
 
         // GET: Requerimientos
-        public ActionResult Index(int empleado =0, int estado = 0)
+        public ActionResult Index(int empleado =0, int estado = 0   )
         {
             List<Empleado> EmpleadoList = FindListEmpleados();
             ViewBag.EmpleadoList = new SelectList(EmpleadoList, "Id_empleado", "Nombre");
@@ -66,7 +66,8 @@ namespace Seguros.Web.FrontEnd.Controllers
 
         private bool validarRequerimientoEmpleado(Requerimiento req , int empleado)
         {
-            if (empleado == 0 || req.Empleado.Id_empleado == empleado)
+            if (req.Empleado == null) return false;
+            if ( empleado == 0 || req.Empleado.Id_empleado == empleado)
             {
                 return true;
             }
@@ -74,7 +75,7 @@ namespace Seguros.Web.FrontEnd.Controllers
         }
         private bool validarRequerimientoEstado(Requerimiento req, int estado)
         {
-            
+            if (req.Estado == null) return false;
             if (estado == 0 || req.Estado.Id == estado)
             {
                 return true;

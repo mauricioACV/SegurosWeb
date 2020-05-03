@@ -17,7 +17,17 @@ namespace Seguros.Web.FrontEnd.Controllers
         // GET: RequerimientosSinAsignacion
         public ActionResult Index()
         {
-            return View(db.Requerimiento.ToList());
+            db.Empleado.ToList();
+            db.Cliente.ToList();
+            db.Estado.ToList();
+            List<Requerimiento> listNoAsignados = new List<Requerimiento>();
+            db.Requerimiento.ToList().ForEach( req => {
+                if (req.Estado.Descripcion.Equals("PENDIENTE"))
+                {
+                    listNoAsignados.Add(req);
+                }
+            });
+            return View(listNoAsignados);
         }
 
         // GET: RequerimientosSinAsignacion/Details/5
@@ -65,12 +75,45 @@ namespace Seguros.Web.FrontEnd.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            db.Cliente.ToList();
+            db.Estado.ToList();
+            db.Rol.ToList();
+            db.Requerimiento.ToList();
+            List<Empleado> listEmpleados = db.Empleado.ToList();
+
+            List <ResumenClass> listInfo = new List<ResumenClass>();
+
+            listEmpleados.ForEach(emp => {
+                ResumenClass arreglo = new ResumenClass();
+                arreglo.nombre = emp.Nombre + " " + emp.ApellidoPat + " " + emp.ApellidoMat;
+                arreglo.puesto = "EJECUTIVO VENTA";
+                arreglo.cantidadReq = getCantidadReqAsignada(emp.Requerimientos);
+                arreglo.idEmpleado = emp.Id_empleado;
+                listInfo.Add(arreglo);
+            });
+            ViewBag.Empleados = listInfo;
             Requerimiento requerimiento = db.Requerimiento.Find(id);
             if (requerimiento == null)
             {
                 return HttpNotFound();
             }
+            requerimiento.Empleado = new Empleado();
             return View(requerimiento);
+        }
+
+        private int getCantidadReqAsignada(List<Requerimiento> listaRequerimientos)
+        {
+            if (listaRequerimientos == null) return 0;
+            int cantidad = 0;
+            listaRequerimientos.ForEach( req => {
+                if (req.Estado.Descripcion.CompareTo("CERRADO") != 0 && req.Estado.Descripcion.CompareTo("CANCELADO") != 0 
+                && req.Estado.Descripcion.CompareTo("APROBADO") != 0  )
+                {
+                    cantidad++;
+                }
+            });
+
+            return cantidad;
         }
 
         // POST: RequerimientosSinAsignacion/Edit/5
@@ -78,15 +121,24 @@ namespace Seguros.Web.FrontEnd.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Fecha_req,Fecha_limit_req,Fecha_fin_real")] Requerimiento requerimiento)
+        public ActionResult Edit(int Id, [Bind(Include = "Id_empleado")] String Id_empleado)
         {
             if (ModelState.IsValid)
             {
+                Estado estado = db.Estado.Where(e => e.Descripcion.Equals("PROCESANDO")).FirstOrDefault();
+                DateTime localDate = DateTime.Now;
+                localDate.AddDays(10);
+                Empleado empleados = db.Empleado.Find(Int32.Parse(Id_empleado));
+                Requerimiento requerimiento = db.Requerimiento.Find(Id);
+                requerimiento.Fecha_limit_req = localDate;
+                requerimiento.Fecha_fin_real = localDate;
+                requerimiento.Empleado = empleados;
+                requerimiento.Estado = estado;
                 db.Entry(requerimiento).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(requerimiento);
+            return View();
         }
 
         // GET: RequerimientosSinAsignacion/Delete/5

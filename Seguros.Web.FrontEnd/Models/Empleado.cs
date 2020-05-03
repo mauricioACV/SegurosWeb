@@ -45,7 +45,7 @@ namespace Seguros.Web.FrontEnd.Models
 
         public string Email { get; set; }
 
-        public int Rol { get; set; }
+        public Rol Rol { get; set; }
 
         public List<Requerimiento> Requerimientos { get; set; }
     }

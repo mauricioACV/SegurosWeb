@@ -4,44 +4,44 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2 style="text-align:center; margin-top: 5%;">REQUERIMIENTOS ASIGNADOS</h2>
 
 @using (Html.BeginForm("Index", "Requerimientos/Index", FormMethod.Post))
 {
-    <div class="form-group">
-        @Html.LabelFor(model => model.First().Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="container" style=" margin: 5%;">
+    <div class="form-group container">
+        <p class="col-md-2" style=" font-weight: bold;" >EMPLEADO</p>
         <div class="col-md-10">
             @if (ViewBag.EmpleadoList != null)
             {
-                @Html.DropDownListFor(model => model.First().Empleado, ViewBag.EmpleadoList as SelectList, "---Seleccione Empleado----", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.First().Empleado, ViewBag.EmpleadoList as SelectList, "--- Seleccionar Empleado----", new { @class = "form-control" })
             }
 
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.First().Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group container">
+        <p class="col-md-2" style=" font-weight: bold;">ESTADO</p>
         <div class="col-md-10">
             @if (ViewBag.EstadoList != null)
             {
-                @Html.DropDownListFor(model => model.First().Estado, ViewBag.EstadoList as SelectList, "---Seleccione Estado----", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.First().Estado, ViewBag.EstadoList as SelectList, "--- Seleccionar Estado----", new { @class = "form-control" })
             }
 
         </div>
     </div>
 
-    <input id="Submit1" type="submit" value="submit" />
+    <div class="container" style="padding-left: 19%;">
+        <input id="Submit1" type="submit" value="Aplicar" class="btn btn-primary btn-lg btn-block" />
+    </div>
+</div>
 }
 
 <br>
 
 @if (Model != null)
 {
-    <table class="table">
+    <table class="table"  style="background: lightgoldenrodyellow;">
         <tr>
             <th>
                 ENCARGADO

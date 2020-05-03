@@ -4,42 +4,55 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center; margin-top: 5%;">NUEVOS REQUERIMIENTOS</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha_req)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha_limit_req)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha_fin_real)
-        </th>
-        <th></th>
-    </tr>
+<div class="container" style="margin-top: 5%;">
+    <table class="table" style="background: lightgoldenrodyellow;">
+        <tr>
+            <th>
+                RUT CLIENTE
+            </th>
+            <th>
+                FECHA INGRESO
+            </th>
+            <th>
+                FECHA LIMITE
+            </th>
+            <th>
+                OPERACION
+            </th>
+            <th>
+                ESTADO
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha_req)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha_limit_req)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha_fin_real)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Cliente.Rut_cliente
+                </td>
+                <td>
+                    @item.Fecha_req.ToString("dd'/'MM'/'yyyy")
+                </td>
+                <td>
+                    @item.Fecha_limit_req.ToString("dd'/'MM'/'yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.Operacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado.Descripcion)
+                </td>
+                <td>
+                    @if (item.Estado.Descripcion == "PENDIENTE")
+                    {
+                        @Html.ActionLink("Asignar Encargado", "Edit", new { id = item.Id })
+                    }
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

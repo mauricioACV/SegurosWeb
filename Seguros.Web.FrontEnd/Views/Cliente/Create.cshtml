@@ -11,10 +11,12 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
+<div class="form-horizontal container">
     <h4>Cliente</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="container col-md-4">
     <div class="form-group">
         @Html.LabelFor(model => model.Rut_cliente, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -54,7 +56,9 @@
             @Html.ValidationMessageFor(model => model.Fecha_nacimiento, "", new { @class = "text-danger" })
         </div>
     </div>
-
+</div>
+   
+<div class="container col-md-4">
     <div class="form-group">
         @Html.LabelFor(model => model.Calle, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -100,7 +104,9 @@
             </select>
         </div>
     </div>
-
+</div>
+    
+<div class="container col-md-4">
     <div class="form-group">
         @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -140,6 +146,8 @@
             @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
         </div>
     </div>
+</div>
+   
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
