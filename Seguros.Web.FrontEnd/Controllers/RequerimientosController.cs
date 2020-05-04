@@ -49,6 +49,8 @@ namespace Seguros.Web.FrontEnd.Controllers
             ViewBag.EmpleadoList = new SelectList(EmpleadoList, "Id_empleado", "Nombre");
 
             List<Estado> EstadoList = db.Estado.ToList();
+            Estado quitar = EstadoList.Where(est => est.Descripcion== "PENDIENTE").First();
+            EstadoList.Remove(quitar);
             ViewBag.EstadoList = new SelectList(EstadoList, "Id", "Descripcion");
 
             List<Cliente> listEmpleado = db.Cliente.ToList();

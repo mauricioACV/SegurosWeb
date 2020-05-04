@@ -189,6 +189,18 @@
     <Compile Include="Migrations\202005030054421_migracion.Designer.cs">
       <DependentUpon>202005030054421_migracion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005032217516_ad.cs" />
+    <Compile Include="Migrations\202005032217516_ad.Designer.cs">
+      <DependentUpon>202005032217516_ad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005032252465_ad1.cs" />
+    <Compile Include="Migrations\202005032252465_ad1.Designer.cs">
+      <DependentUpon>202005032252465_ad1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005032259241_ad2.cs" />
+    <Compile Include="Migrations\202005032259241_ad2.Designer.cs">
+      <DependentUpon>202005032259241_ad2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Ciudad.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -307,6 +319,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005030054421_migracion.resx">
       <DependentUpon>202005030054421_migracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005032217516_ad.resx">
+      <DependentUpon>202005032217516_ad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005032252465_ad1.resx">
+      <DependentUpon>202005032252465_ad1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005032259241_ad2.resx">
+      <DependentUpon>202005032259241_ad2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,19 +6,29 @@
 
 <h2>Create</h2>
 
+@if(ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        }
+    </script>
+}
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal container">
-    <h4>Cliente</h4>
+<div class=" container">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 <div class="container col-md-4">
     <div class="form-group">
-        @Html.LabelFor(model => model.Rut_cliente, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Rut_cliente, htmlAttributes: new { @class = "control-label col-md-2" }) 
+        </div>
         <div class="col-md-10">
             @Html.EditorFor(model => model.Rut_cliente, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Rut_cliente, "", new { @class = "text-danger" })
@@ -26,7 +36,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>       
         <div class="col-md-10">
             @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
@@ -34,7 +46,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ApellidoPat, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.ApellidoPat, htmlAttributes: new { @class = "control-label col-md-10"})
+        </div>        
         <div class="col-md-10">
             @Html.EditorFor(model => model.ApellidoPat, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ApellidoPat, "", new { @class = "text-danger" })
@@ -42,7 +56,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ApellidoMat, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.ApellidoMat, htmlAttributes: new { @class = "control-label col-md-10" })
+        </div>        
         <div class="col-md-10">
             @Html.EditorFor(model => model.ApellidoMat, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ApellidoMat, "", new { @class = "text-danger" })
@@ -50,7 +66,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Fecha_nacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Fecha_nacimiento, htmlAttributes: new { @class = "control-label col-md-10" })
+        </div>        
         <div class="col-md-10">
             @Html.EditorFor(model => model.Fecha_nacimiento, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Fecha_nacimiento, "", new { @class = "text-danger" })
@@ -60,7 +78,9 @@
    
 <div class="container col-md-4">
     <div class="form-group">
-        @Html.LabelFor(model => model.Calle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Calle, htmlAttributes: new { @class = "control-label col-md-2"})
+        </div>        
         <div class="col-md-10">
             @Html.EditorFor(model => model.Calle, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Calle, "", new { @class = "text-danger" })
@@ -68,7 +88,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.NumCalle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.NumCalle, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
         <div class="col-md-10">
             @Html.EditorFor(model => model.NumCalle, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.NumCalle, "", new { @class = "text-danger" })
@@ -76,11 +98,12 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Region, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>        
         <div class="col-md-10">
             @if (ViewBag.RegionList != null)
             {
-                @Html.DisplayNameFor(model => model.Region)
                 @Html.DropDownListFor(model => model.Region, ViewBag.RegionList as SelectList, "---Seleccione Una region----", new { @class = "form-control" })
             }
 
@@ -89,8 +112,10 @@
 
     <div class="form-group">
         <div class="col-md-10">
-            <label>Ciudad</label>
-            <select id="ciudades" class="form-control">
+            <label class="control-label col-md-2">Ciudad</label>
+        </div>        
+        <div class="col-md-10">
+            <select id="ciudades_name" name="ciudades_name" class="form-control" required>
                 <option>Selecione Ciudad</option>
             </select>
         </div>
@@ -98,8 +123,10 @@
 
     <div class="form-group">
         <div class="col-md-10">
-            <label>Comuna</label>
-            <select id="comuna" class="form-control">
+            <label class="control-label col-md-2">Comuna</label>
+        </div>
+        <div class="col-md-10">
+            <select id="comuna_name" name="comuna_name" class="form-control" required>
                 <option>Selecione Comuna</option>
             </select>
         </div>
@@ -108,7 +135,9 @@
     
 <div class="container col-md-4">
     <div class="form-group">
-        @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
         <div class="col-md-10">
             @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
@@ -116,7 +145,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>        
         <div class="col-md-10">
             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
@@ -124,52 +155,63 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Operacion, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
+            @Html.LabelFor(model => model.Operacion, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>
+        <div class="col-md-10">
+
             @Html.EditorFor(model => model.Operacion, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Operacion, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+        </div>        
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
+
         </div>
     </div>
 </div>
    
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+        <div class="col-md-offset-2 col-md-10" style="margin-top: 20px;">
+            <input type="submit" value="Agregar" name="Agregar" id="Agregar" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "RequerimientosSinAsignacion")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 <script>
-        $(function () {
-
+    $(function () {
+        $("#Agregar").click(function () {
+            debugger
+            var ciu = document.getElementById("ciudades_name");
+            var strUser = ciu.options[ciu.selectedIndex].value;
+            if (strUser == "Selecione Ciudad") {
+                alert("Debe completar todos los cuadros")
+                return;
+            }
+            var comu = document.getElementById("comuna_name");
+            var strUser = comu.options[ciu.selectedIndex].value;
+            if (strUser == "Selecione Comuna") {
+                alert("Debe completar todos los cuadros")
+                return;
+            }
+        })
             $("#Region").change(function () {
                 var ciudad = this.value;
                 $.get("@Url.Action("GetCiudadByRegion", "Cliente")", { id: ciudad }, function (data) {
-
                     if (data.CiudadList) {
                         fillCiudades(data.CiudadList);
                     }
@@ -177,39 +219,128 @@
 
             });
             function fillCiudades(data) {
-                $("#ciudades").empty();
+                $("#ciudades_name").empty();
                 var options = '<option>Selecione Ciudad</option>';
                 for (var i = 0; i < data.length; i++) {
                     options += '<option value="' + data[i].Nombre_ciudad + '">' + data[i].Nombre_ciudad + '</option>';
                 }
-                $("#ciudades").append(options);
-                $("#comuna").empty();
+                $("#ciudades_name").append(options);
+                $("#comuna_name").empty();
                 var options = '<option>Selecione Comuna</option>';
-                $("#comuna").append(options);
+                $("#comuna_name").append(options);
             };
-            $("#ciudades").change(function () {
-                var e = document.getElementById("ciudades");
+            $("#ciudades_name").change(function () {
+                var e = document.getElementById("ciudades_name");
                 var strUser = e.options[e.selectedIndex].value;
                 $.get("@Url.Action("GetComunaByCiudad", "Cliente")", { name: strUser }, function (data) {
 
                     if (data.ComunaList && data.ComunaList.length > 0) {
                         fillComuna(data.ComunaList);
                     } else {
-                        $("#comuna").empty();
+                        $("#comuna_name").empty();
                         options = '<option value="' + strUser + '">' + strUser + '</option>';
-                        $("#comuna").append(options);
+                        $("#comuna_name").append(options);
                     }
                 });
 
             });
             function fillComuna(data) {
-                $("#comuna").empty();
+                $("#comuna_name").empty();
                 var options = '<option>Selecione Comuna</option>';
                 for (var i = 0; i < data.length; i++) {
-                    options += '<option value="' + data[i].Id + '">' + data[i].Nombre_comuna + '</option>';
+                    options += '<option value="' + data[i].Nombre_comuna + '">' + data[i].Nombre_comuna + '</option>';
                 }
-                $("#comuna").append(options);
+                $("#comuna_name").append(options);
             };
+
+            $("#Rut_cliente").focusout(function () {
+                var rut = this.value;
+                var valido = formatoRut(rut);
+                if (valido) {
+                    checkRut(this)
+                }
+                
+            })
+            function formatoRut(rut) {
+                var div1, div2, div3, div4;
+                var valido = false;
+                var valor = rut.replace('.', '').replace('.', '').replace('.', '');
+                valor = valor.replace('-', '');
+                if (valor.length == 9) {
+                    div1 = valor.slice(0, 2);
+                    div2 = valor.slice(2, 5);
+                    div3 = valor.slice(5, 8);
+                    div4 = valor.slice(8, 9);
+
+                    valor = div1 + "." + div2 + "." + div3 + "-" + div4;
+                    valido = true;
+                }
+
+                if (valor.length == 8) {
+                    div1 = valor.slice(0, 1);
+                    div2 = valor.slice(1, 4);
+                    div3 = valor.slice(4, 7);
+                    div4 = valor.slice(7, 8);
+
+                    valor = div1 + "." + div2 + "." + div3 + "-" + div4;
+                    valido = true;
+                }
+                if (valido == false) {
+                    alert("RUT Inválido")
+                    return false;
+                }
+                $("#Rut_cliente").val(valor);
+                return true;
+            }
+            function checkRut(rut) {
+                // Despejar Puntos
+                var valor = rut.value.replace('.', '').replace('.', '').replace('.', '');
+                // Despejar Guión
+                valor = valor.replace('-', '');
+
+                // Aislar Cuerpo y Dígito Verificador
+                cuerpo = valor.slice(0, -1);
+                dv = valor.slice(-1).toUpperCase();
+
+                // Formatear RUN
+                rut.value = cuerpo + '-' + dv
+
+                // Si no cumple con el mínimo ej. (n.nnn.nnn)
+                if (cuerpo.length < 7) { alert("RUT Incompleto"); return false; }
+
+                // Calcular Dígito Verificador
+                suma = 0;
+                multiplo = 2;
+
+                // Para cada dígito del Cuerpo
+                for (i = 1; i <= cuerpo.length; i++) {
+
+                    // Obtener su Producto con el Múltiplo Correspondiente
+                    index = multiplo * valor.charAt(cuerpo.length - i);
+
+                    // Sumar al Contador General
+                    suma = suma + index;
+
+                    // Consolidar Múltiplo dentro del rango [2,7]
+                    if (multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+
+                }
+
+                // Calcular Dígito Verificador en base al Módulo 11
+                dvEsperado = 11 - (suma % 11);
+
+                // Casos Especiales (0 y K)
+                dv = (dv == 'K') ? 10 : dv;
+                dv = (dv == 0) ? 11 : dv;
+
+                // Validar que el Cuerpo coincide con su Dígito Verificador
+                if (dvEsperado != dv) { alert("RUT Inválido"); return false; }
+
+                // Si todo sale bien, eliminar errores (decretar que es válido)
+                rut.setCustomValidity('');
+            }
         });
+
+    
 </script>
 }

@@ -13,38 +13,49 @@ namespace Seguros.Web.FrontEnd.Models
         [Key]
         public int Id_cliente { get; set; }
 
+        [Required]
         [Display(Name = "Rut")]
-        public int Rut_cliente { get; set; }
+        public string Rut_cliente { get; set; }
 
+        [Required]
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
+        [Required]
         [Display(Name = "Apellido Paterno")]
         public string ApellidoPat { get; set; }
 
+        [Required]
         [Display(Name = "Apellido Materno")]
         public string ApellidoMat { get; set; }
 
+        [Required]
         [Display(Name = "Fecha Nacimiento")]
         [DataType(DataType.Date)]
         public DateTime Fecha_nacimiento { get; set; }
 
+        [Required]
         public string Calle { get; set; }
 
         [Display(Name = "Número")]
         public int NumCalle { get; set; }
 
+        [Required]
         public Comuna comuna { get; set; }
 
+        [Required]
         public Ciudad ciudad { get; set; }
 
+        [Required]
         [Display(Name = "Región")]
         public Region Region { get; set; }
 
+        [Required]
         public int Telefono { get; set; }
 
         public string Email { get; set; }
 
+        [Required]
         [Display(Name = "Operación")]
         public string Operacion { get; set; }
 

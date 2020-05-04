@@ -64,18 +64,76 @@ namespace Seguros.Web.FrontEnd.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_cliente,Rut_cliente,Nombre,ApellidoPat,ApellidoMat,Fecha_nacimiento,Calle,NumCalle,Comuna,Ciudad,Region,Telefono,Email,Operacion,Estado,Observaciones")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "Id_cliente,Rut_cliente,Nombre,ApellidoPat,ApellidoMat,Fecha_nacimiento,Calle,NumCalle,Comuna,Ciudad,Region,Telefono,Email,Operacion,Estado,Observaciones")] Cliente cliente, String ciudades_name, String comuna_name, String Region)
         {
-            if (ModelState.IsValid)
+            try
             {
+                Requerimiento newReq = new Requerimiento();
+                newReq.Fecha_req = DateTime.Now;
+                newReq.Fecha_limit_req = DateTime.Now.AddDays(12);
+                newReq.Fecha_fin_real = DateTime.Now.AddDays(12);
+                int Id = 1;
+                newReq.Estado = db.Estado.Find(Id);
+                Id = Int32.Parse(Region);
+                cliente.Region = db.Region.Find(Id);
+                cliente.ciudad = db.Ciudad.Where(e => e.Nombre_ciudad.Equals(ciudades_name)).FirstOrDefault();
+                cliente.comuna = db.Comuna.Where(e => e.Nombre_comuna.Equals(comuna_name)).FirstOrDefault();
                 db.Cliente.Add(cliente);
+                newReq.Cliente = cliente;
+                db.Requerimiento.Add(newReq);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "RequerimientosSinAsignacion");
+            }catch(Exception e)
+            {
+                List<Region> RegionList = db.Region.ToList();
+                ViewBag.RegionList = new SelectList(RegionList, "Id", "Nombre_region");
+                return View(cliente);
             }
-
-            return View(cliente);
         }
 
+        private bool ValidaRut(string rut)
+        {
+            rut = rut.Replace(".", "").ToUpper();
+            System.Text.RegularExpressions.Regex expresion = new System.Text.RegularExpressions.Regex("^([0-9]+-[0-9K])$");
+            string dv = rut.Substring(rut.Length - 1, 1);
+            if (!expresion.IsMatch(rut))
+            {
+                return false;
+            }
+            char[] charCorte = { '-' };
+            string[] rutTemp = rut.Split(charCorte);
+            if (dv != Digito(int.Parse(rutTemp[0])))
+            {
+                return false;
+            }
+            return true;
+        }
+        private string Digito(int rut)
+        {
+            int suma = 0;
+            int multiplicador = 1;
+            while (rut != 0)
+            {
+                multiplicador++;
+                if (multiplicador == 8)
+                    multiplicador = 2;
+                suma += (rut % 10) * multiplicador;
+                rut = rut / 10;
+            }
+            suma = 11 - (suma % 11);
+            if (suma == 11)
+            {
+                return "0";
+            }
+            else if (suma == 10)
+            {
+                return "K";
+            }
+            else
+            {
+                return suma.ToString();
+            }
+        }
         // GET: Cliente/Edit/5
         public ActionResult Edit(int? id)
         {
